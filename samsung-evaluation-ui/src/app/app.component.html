@@ -1,0 +1,117 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content class="content">
+        <mat-toolbar color="primary">
+            <span>Samsung Evaluation API</span>
+        </mat-toolbar>
+        <div class="container">
+            <br>
+            <mat-card>
+
+                <mat-card-header>
+                    <mat-card-title>Search Criterias</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <mat-form-field class="example-full-width form-group" appearance="fill">
+                        <mat-label>Document Number</mat-label>
+                        <input matInput placeholder="0000000000" id="numeroPesquisa" [(ngModel)]="numeroPesquisa"
+                            value="">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-group" appearance="fill">
+                        <mat-label>Selecione</mat-label>
+                        <mat-select placeholder="Selecione a moeda" id="moeda" [(ngModel)]="descricaoMoeda">
+                            <mat-option *ngFor="let moeda of moedas" [value]="moeda">{{ moeda }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-group" appearance="fill">
+                        <mat-label>Document Date:</mat-label>
+                        <input matInput type="date" id="dataDocumento" [(ngModel)]="dataDocumento">
+                    </mat-form-field>
+
+                    <mat-form-field class="form-group" appearance="fill">
+                        <mat-label>Quotation Date:</mat-label>
+                        <input matInput type="date" id="dataCotacao" [(ngModel)]="dataCotacao">
+                    </mat-form-field>
+
+                </mat-card-content>
+
+                <mat-card-actions align="end">
+                    <button mat-button (click)="pesquisar(numeroPesquisa, descricaoMoeda, dataDocumento, dataCotacao, descricaoMoeda)">Search</button>
+                    <button mat-button (click)="limparFormulario()">Clean</button>
+                </mat-card-actions>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Self Evaluation Results</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+                    <table mat-table [dataSource]="dataSourceConsultaTodos" class="mat-elevation-z8">
+
+                        <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Document Number -->
+                        <ng-container matColumnDef="documentNumber">
+                            <th mat-header-cell *matHeaderCellDef> Document Number </th>
+                            <td mat-cell *matCellDef="let element"> {{element.documentNumber}} </td>
+                        </ng-container>
+
+                        <!-- Document Date -->
+                        <ng-container matColumnDef="documentDate">
+                            <th mat-header-cell *matHeaderCellDef> Document Date </th>
+                            <td mat-cell *matCellDef="let element"> {{element.documentDate}} </td>
+                        </ng-container>
+
+                        <!-- Currency Code -->
+                        <ng-container matColumnDef="currencyCode">
+                            <th mat-header-cell *matHeaderCellDef> Currency Code </th>
+                            <td mat-cell *matCellDef="let element"> {{element.currencyCode}} </td>
+                        </ng-container>
+
+                        <!-- Currency Desc -->
+                        <ng-container matColumnDef="currencyDesc">
+                            <th mat-header-cell *matHeaderCellDef> Currency Desc </th>
+                            <td mat-cell *matCellDef="let element"> {{element.currencyDesc}} </td>
+                        </ng-container>
+
+                        <!-- Documento Value -->
+                        <ng-container matColumnDef="documentValue">
+                            <th mat-header-cell *matHeaderCellDef> Documento Value </th>
+                            <td mat-cell *matCellDef="let element"> {{element.documentValue}} </td>
+                        </ng-container>
+
+                        <!-- Value USD -->
+                        <ng-container matColumnDef="valueUSD">
+                            <th mat-header-cell *matHeaderCellDef> Value USD </th>
+                            <td mat-cell *matCellDef="let element"> {{element.valueUSD}} </td>
+                        </ng-container>
+
+                        <!-- Value PEN -->
+                        <ng-container matColumnDef="valuePEN">
+                            <th mat-header-cell *matHeaderCellDef> Value PEN </th>
+                            <td mat-cell *matCellDef="let element"> {{element.valuePEN}} </td>
+                        </ng-container>
+
+                        <!-- Value BRL -->
+                        <ng-container matColumnDef="valueBRL">
+                            <th mat-header-cell *matHeaderCellDef> Value BRL </th>
+                            <td mat-cell *matCellDef="let element"> {{element.valueBRL}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+
+                </mat-card-content>
+            </mat-card>
+            <br>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
